@@ -1,13 +1,15 @@
+PYTHON ?= python
+
 .PHONY: install test run clean
 
 install:
-	pip install -e ".[test]"
+	$(PYTHON) -m pip install -e ".[test]"
 
 test:
-	pytest
+	$(PYTHON) -m pytest
 
 run:
-	physex --constants
+	$(PYTHON) -m physex.cli --constants
 
 clean:
 	rm -rf build dist .pytest_cache .mypy_cache .coverage
