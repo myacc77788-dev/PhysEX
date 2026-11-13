@@ -46,6 +46,16 @@ def test_div_scalar():
     assert (Quantity(10.0, "м") / 2).value == pytest.approx(5.0)
 
 
+@pytest.mark.parametrize(
+    ("numerator_unit", "denominator_unit", "expected_unit"),
+    [("", "с", "1/с"), ("м", "с", "м/с"), ("м", "", "м"), ("", "", "")],
+)
+def test_div_quantity_units(numerator_unit, denominator_unit, expected_unit):
+    q = Quantity(10.0, numerator_unit) / Quantity(2.0, denominator_unit)
+    assert q.value == pytest.approx(5.0)
+    assert q.unit == expected_unit
+
+
 def test_pow():
     q = Quantity(3.0, "м") ** 2
     assert q.value == pytest.approx(9.0)

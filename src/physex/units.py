@@ -93,7 +93,7 @@ class Quantity:
 def _join_units(a: str, b: str, op: str) -> str:
     """Объединить строки единиц для операций умножения/деления."""
     if not a:
-        return b
+        return f"1/{b}" if op == "/" and b else b
     if not b:
         return a
     if op == "*":
